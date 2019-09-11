@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const config = require('config');
+const UserModel = require('./user.model');
 
 const dbConfig = {
     database: config.get('mysql.database'),
@@ -14,4 +15,8 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
     dialect: 'mysql'
 });
 
-module.exports = sequelize;
+const User = sequelize.define("User", UserModel);
+
+
+
+module.exports = { sequelize, User };
