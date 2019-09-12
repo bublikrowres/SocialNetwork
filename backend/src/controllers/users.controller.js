@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const UserCommand = require('../commands/users.command');
 const isAuth = require('../middlewares/auth.middleware');
-console.log(isAuth);
 
 // router.get('/:id', (req, res) => {
 //     res.json({
@@ -34,6 +33,7 @@ router.post('/login', async(req, res) => {
 
 router.get('/me', isAuth, async(req, res) => {
     res.json({ message: 'you are authenticated', user: req.user });
-})
+});
+
 
 module.exports = router;

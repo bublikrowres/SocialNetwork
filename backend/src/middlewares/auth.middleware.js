@@ -3,7 +3,6 @@ const config = require('config');
 
 async function isAuth(req, res, next) {
     const header = req.headers['authorization'];
-    console.log(header);
     if (!header) {
         res.status(401).json({ error: 'You must be authenticated' });
         return;
