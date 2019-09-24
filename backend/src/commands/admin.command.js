@@ -1,6 +1,4 @@
 const { User } = require('../models/databaseConnector');
-const jwt = require('jsonwebtoken');
-const md5 = require('md5');
 const config = require('config');
 
 class AdminCommand {
