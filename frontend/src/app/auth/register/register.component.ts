@@ -7,6 +7,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  registerMessage: string;
+  registerValidate: boolean = false;
   user = {
     email: '',
     name: '',
@@ -21,17 +23,23 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-    console.log(this.user);
-    this.authService.register(this.user).subscribe((data)=>{
-      console.log(data);
-      this.user = {
-        email: '',
-        name: '',
-        password: '',
-        confirmedPassword: ''
-      };
-    },(err)=>{
-      console.log(err);
-    });
+    //created check function in AuthServices for register form
+    const result = this.authService.checkRegister(this.user)
+    this.registerValidate = result.status;
+    this.registerMessage = result.message;
+    //register user
+    if(this.registerValidate){
+      this.authService.register(this.user).subscribe((data)=>{
+        console.log(data);
+        this.user = {
+          email: '',
+          name: '',
+          password: '',
+          confirmedPassword: ''
+        };
+      },(err)=>{
+        console.log(err);
+      });
+    } 
   }
 }

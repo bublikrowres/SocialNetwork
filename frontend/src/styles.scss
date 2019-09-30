@@ -4,3 +4,13 @@
 body {
     margin: 0;
 }
+
+.alert {
+    color: red;
+    border: 1px solid red;
+    border-radius: 9999em;
+    padding: 5px;
+    text-align: center;
+    margin: 20px;
+    background-color: whitesmoke;
+}

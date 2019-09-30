@@ -6,6 +6,9 @@
     height: 100vh;
     overflow: hidden;
     background-color: rgb(102, 116, 163);
+    .formHeader {
+        text-align: center;
+    }
     .container {
         width: 400px;
         min-height: 400px;
@@ -20,5 +23,6 @@
     a {
         text-align: center;
         margin-top: 10px;
+        align-self: flex-end;
     }
 }

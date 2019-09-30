@@ -1,1 +1,19 @@
-<p>login works!</p>
+<mat-card class="container">
+    <div class="formHeader">
+        <h1>Social Network</h1>
+    </div>
+    <form>
+        <mat-form-field class="inputForm">
+            <input required name="email" type="email" matInput placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <mat-form-field class="inputForm">
+            <input required name="password" type="password" matInput placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="login();displayAlert=true">Register</button>
+        <p *ngIf="displayAlert" class="alert">
+            {{loginMessage}}
+        </p>
+
+    </form>
+    <a [routerLink]="['/register']">Not registered? Do it now</a>
+</mat-card>
