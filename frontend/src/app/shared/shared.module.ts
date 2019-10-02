@@ -7,6 +7,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppRoutingModule } from "../app-routing.module";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IsAuthGuard } from './guards/is-auth.guard';
+import { NotAuthGuard } from './guards/not-auth.guard';
 
 
 @NgModule({
@@ -19,6 +21,10 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule
+  ],
+  providers:[
+    IsAuthGuard,
+    NotAuthGuard
   ],
   exports: [MatCardModule,MatInputModule,MatButtonModule,AppRoutingModule,HttpClientModule,FormsModule]
 })

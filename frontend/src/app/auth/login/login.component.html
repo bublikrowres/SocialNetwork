@@ -9,7 +9,7 @@
         <mat-form-field class="inputForm">
             <input required name="password" type="password" matInput placeholder="Password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="login();displayAlert=true">Register</button>
+        <button mat-raised-button color="primary" (click)="login();displayAlert=true">Login</button>
         <p *ngIf="displayAlert" class="alert">
             {{loginMessage}}
         </p>
