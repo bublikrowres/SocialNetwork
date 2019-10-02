@@ -33,7 +33,7 @@ class UserCommand {
         await userBuilt.save();
         const userRaw = { id: userBuilt.id, name: userBuilt.name, email: userBuilt.email };
         const token = await this.createToken(userRaw);
-        return { message: 'User Created', user: userRaw, token };
+        return { token, email: user.email, id: user.id, name: user.name };
     }
 
     async createToken(user) {
@@ -50,7 +50,7 @@ class UserCommand {
             throw new Error('Password doen\' match');
         }
         const token = await this.createToken({ email, id: user.id, name: user.name });
-        return { token };
+        return { token, email, id: user.id, name: user.name };
     }
 
     async allUsers() {

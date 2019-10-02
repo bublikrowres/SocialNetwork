@@ -1,5 +1,4 @@
 const { User } = require('../models/databaseConnector');
-const config = require('config');
 
 class AdminCommand {
     constructor() {
