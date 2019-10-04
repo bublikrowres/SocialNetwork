@@ -1,0 +1,21 @@
+:host {
+    width: 90%;
+    margin: auto 5%;
+    .postBody {
+        padding: 5%;
+        background-color: white;
+    }
+    .likeAndComment {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .postDescription {
+        margin: 15px 15px;
+    }
+    .postAuthor {
+        margin-left: 5px;
+    }
+    .postCreated {
+        margin-top: 5px;
+    }
+}

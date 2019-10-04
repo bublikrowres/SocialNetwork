@@ -1,0 +1,9 @@
+:host {
+    .container {
+        width: 400px;
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+}

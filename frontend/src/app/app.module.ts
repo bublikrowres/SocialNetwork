@@ -17,7 +17,7 @@ import { WallModule } from './wall/wall.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AuthModule,
-    WallModule
+    WallModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

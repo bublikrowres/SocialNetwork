@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/shared/models/user';
 import { config } from "../../shared/config";
 import { map } from 'rxjs/operators';
-import { BehaviorSubject , Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,6 @@ export class AuthService {
     private http: HttpClient
   ) {
     this.getUserFromLocalStorage(); 
-
    }
 
   register(user:User){

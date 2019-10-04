@@ -1,1 +1,5 @@
-<p>main works!</p>
+<sn-wall-control (refresh)="refreshFeed()" (toggle)="toggleNewPost()" [numberOfPosts]="numberOfPosts">
+</sn-wall-control>
+<sn-new-post *ngIf="newPostStatus" (new)="newPost($event)"></sn-new-post>
+<sn-wall-feed (edit)="editPost($event)" (delete)="deletePost($event)" *ngFor="let item of postsArray" [title]="item.title" [id]="item.id" [author]="item.author" [description]="item.description" [createdAt]="item.createdAt" [likes]="item.likes" [comments]="item.comments">
+</sn-wall-feed>

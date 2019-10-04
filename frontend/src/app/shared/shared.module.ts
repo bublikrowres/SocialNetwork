@@ -9,7 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IsAuthGuard } from './guards/is-auth.guard';
 import { NotAuthGuard } from './guards/not-auth.guard';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -20,13 +22,17 @@ import { NotAuthGuard } from './guards/not-auth.guard';
     MatButtonModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers:[
     IsAuthGuard,
     NotAuthGuard
   ],
-  exports: [MatCardModule,MatInputModule,MatButtonModule,AppRoutingModule,HttpClientModule,FormsModule]
+  exports: [MatCardModule,MatInputModule,MatButtonModule,AppRoutingModule,HttpClientModule,FormsModule,MatExpansionModule,MatMenuModule,MatIconModule]
 })
-export class SharedModule { }
+export class SharedModule {
+ }
 

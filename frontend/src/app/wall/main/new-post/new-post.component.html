@@ -1,0 +1,9 @@
+<form class="container">
+    <mat-form-field class="inputForm">
+        <input required name="email" type="text" matInput placeholder="Title" [(ngModel)]="post.title" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <textarea rows="10" required matInput placeholder="Content" [(ngModel)]="post.description" [ngModelOptions]="{standalone: true}"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="newPost()">Submit</button>
+</form>
