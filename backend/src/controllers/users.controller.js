@@ -3,11 +3,6 @@ const router = express.Router();
 const UserCommand = require('../commands/users.command');
 const isAuth = require('../middlewares/auth.middleware');
 
-// router.get('/:id', (req, res) => {
-//     res.json({
-//         userId: req.params.id
-//     });
-// });
 
 router.post('/', async(req, res) => {
     const user = req.body;

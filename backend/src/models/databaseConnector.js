@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('config');
 const UserModel = require('./user.model');
+const PostModel = require('./post.model');
 
 const dbConfig = {
     database: config.get('mysql.database'),
@@ -16,7 +17,8 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
 });
 
 const User = sequelize.define("User", UserModel);
+const Post = sequelize.define("Post", PostModel);
 
 
 
-module.exports = { sequelize, User };
+module.exports = { sequelize, User, Post };
