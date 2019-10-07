@@ -11,7 +11,7 @@ const config = require('config');
 
 // DB connect
 sequelize.sync({
-    force: false
+    force: false,
 }).then(() => {
     console.log('Succesfully connected to DB');
 });
@@ -25,7 +25,7 @@ app.get('/', (req, res) => res.send(config.endpoints));
 app.use('/users', usersController);
 app.use('/admin', adminController);
 
-app.use('/wall', wallController);
+app.use('/posts', wallController);
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -6,28 +6,13 @@ const Post = {
         primaryKey: true,
         autoIncrement: true
     },
-    author: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
     title: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     description: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    likes: {
-        type: DataTypes.INTEGER,
-    },
-    comments: {
-        type: DataTypes.INTEGER,
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false
     }
 };
 

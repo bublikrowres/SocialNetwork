@@ -8,7 +8,17 @@
     "secret": "asdgwerwera",
     "adminEmails": ["admin@admin.com", "admin2@admin.com"],
     "endpoints": {
-        "/users": { "/": "create user", "/login": "login", "/me": "auth me page" },
-        "/wall": { "/": "see all posts", "/new": "create post", "/show": "view post", "/update": "update post", "/delete": "delete post" }
+        "/users": {
+            "/": "create user",
+            "/login": "login",
+            "/me": "auth me page"
+        },
+        "/wall": {
+            "/": "see all posts",
+            "/new": "create post",
+            "/show": "view post",
+            "/update": "update post",
+            "/delete": "delete post"
+        }
     }
 }
