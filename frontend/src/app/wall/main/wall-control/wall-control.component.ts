@@ -10,7 +10,6 @@ export class WallControlComponent implements OnInit {
 
   @Input() numberOfPosts: number = 12;
   @Output() refresh = new EventEmitter();
-  @Output() new = new EventEmitter();
   @Output() toggle= new EventEmitter();
   ngOnInit() {
   }

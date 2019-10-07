@@ -6,6 +6,8 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
   styleUrls: ['./new-post.component.scss']
 })
 export class NewPostComponent implements OnInit {
+  alertStatus: boolean = false;
+  alertMessage: string;
   post = {
     title: '',
     description: ''
@@ -16,8 +18,12 @@ export class NewPostComponent implements OnInit {
 
   ngOnInit() {
   }
+
   newPost(){
+    if(!this.post.title || !this.post.description){
+      this.alertStatus = true;
+      return this.alertMessage = 'Please complete all required fields'
+    }
     this.new.emit(this.post);
   }
-
 }

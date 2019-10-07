@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from "../services/post.service";
+import {MatDialog} from '@angular/material/dialog';
+import {EditComponent} from './edit/edit.component';
 
 @Component({
   selector: 'sn-main',
@@ -7,25 +9,49 @@ import { PostService } from "../services/post.service";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  alertStatus: boolean = false;
+  alertContent: string = 'test';
   newPostStatus:boolean = false;
   numberOfPosts: number;
   postsArray = [];
+
   user : any;
+  alertTimeout;
   constructor(
     private postService: PostService,
+    public dialog: MatDialog
+  ) {
     
-  ) { }
+   }
 
   ngOnInit() {
     // not sure if OK to get user at ngOnInit() or later?????????????
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.refreshFeed()
   }
 
   refreshFeed(){
     this.postService.allposts().subscribe((data)=>{
       this.numberOfPosts = data['numberOfPosts'];
       this.postsArray = data['allPosts'];
+      // console.log('refresh feed called');
     });
+  }
+  alert(message){
+    this.alertStatus = true;
+    this.alertContent = message;
+    if(!this.alertTimeout){
+      this.alertTimeout = setTimeout(() => {
+        this.alertStatus = false;
+        this.alertContent = '';
+      }, 2000);
+    }else {
+      clearInterval(this.alertTimeout)
+      this.alertTimeout = setTimeout(() => {
+        this.alertStatus = false;
+        this.alertContent = '';
+      }, 2000);
+    }
   }
   newPost(event){
     const newPost = {
@@ -36,11 +62,13 @@ export class MainComponent implements OnInit {
       comments: 0,
       email: this.user.email
     }
-    console.log(newPost);
     this.postService.newPost(newPost).subscribe((data)=>{
+      let message = data['message'];
       this.toggleNewPost();
+      this.refreshFeed();
+      this.alert(message);
     })
-    this.refreshFeed();
+    
   }
   toggleNewPost(){
     if(this.newPostStatus === false){
@@ -49,16 +77,29 @@ export class MainComponent implements OnInit {
       this.newPostStatus = false
     }
   }
-  editPost(postID){
-    console.log(postID);
-    console.log('not made yet')
-  }
-  deletePost(postID){
-    this.postService.delete(postID).subscribe((data)=>{
-      let message = data['result']['message'];
-      console.log(message)
-    })
-    this.refreshFeed();
+
+  editPost(post){
+    this.openDialog(post);
   }
 
+  deletePost(message){
+    this.refreshFeed();
+    this.alert(message);
+  }
+  
+  openDialog(post): void {
+    const dialogRef = this.dialog.open(EditComponent, {
+      width: '350px',
+      data: {id: post.id , title: post.title, description: post.description}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.refreshFeed();
+    });
+  }
+
+  likeOrComment(event){
+    this.refreshFeed();
+    this.alert(event.message)
+  }
 }

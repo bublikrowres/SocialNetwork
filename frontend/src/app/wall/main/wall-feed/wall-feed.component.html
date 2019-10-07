@@ -1,38 +1,44 @@
 <mat-card class="postBody">
-    <mat-card-title-group>
-        <mat-card-title>{{title}} {{id}}</mat-card-title>
-        <div>
+    <mat-card-title-group class="whiteBG">
+        <mat-card-title>{{post.title}}</mat-card-title>
+        <div *ngIf="currentUserStatus">
             <mat-menu #postOptions="matMenu">
-                <button mat-menu-item (click)="editPost($event)" data-id="{{id}}"><mat-icon>edit</mat-icon>Edit</button>
-                <button mat-menu-item (click)="deletePost($event)" data-id="{{id}}"><mat-icon>delete</mat-icon>Delete</button>
+                <button mat-menu-item (click)="editPost()"><mat-icon>edit</mat-icon>Edit</button>
+                <button mat-menu-item (click)="deletePost()"><mat-icon>delete</mat-icon>Delete</button>
             </mat-menu>
             <button mat-icon-button [matMenuTriggerFor]="postOptions">
                 <mat-icon>more_horiz</mat-icon>
             </button>
         </div>
-        <mat-card-subtitle class="postAuthor">{{author}}</mat-card-subtitle>
+        <mat-card-subtitle class="postAuthor">{{post['user.name']}}</mat-card-subtitle>
     </mat-card-title-group>
-    <mat-card-content class="postDescription">{{description}}</mat-card-content>
-
+    <mat-card-content class="postDescription whiteBG">{{post.description}}</mat-card-content>
+    <div class="likeAndComment">
+        <div>
+            <label>{{post.likes}}</label>
+            <mat-icon class="mouseOver" (click)="likeThis()">thumb_up</mat-icon>
+        </div>
+    </div>
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header (click)="populateComments($event)">
             <mat-panel-title class="likeAndComment">
-                <p>
-                    {{likes}}
-                    <mat-icon>thumb_up</mat-icon>
-                </p>
-                <p>
-                    {{comments}}
+                <div>
+                    <label>{{post.comments}}</label>
                     <mat-icon>comment</mat-icon>
-                </p>
+                </div>
             </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <p>This is the primary content of the panel.</p>
-        <p>This is the primary content of the panel.</p>
-        <p>This is the primary content of the panel.</p>
+        <sn-comment *ngFor="let item of commentArray" [comment]="item"></sn-comment>
 
+        <button *ngIf="!addButtonToggle" mat-raised-button color="primary" (click)="commentToggle()">Add comment</button>
+        <br>
+        <div class="flexAround" *ngIf="addButtonToggle">
+            <textarea class="commentTextarea" #textMessage rows="2" required maxlength="255" matInput placeholder="Content" [(ngModel)]="comment_message" [ngModelOptions]="{standalone: true}"></textarea>
+            <button mat-raised-button color="primary" (click)="createComment(textMessage)">Add</button>
+            <p *ngIf="alertStatus" class="alert">{{alertMessage}}</p>
+        </div>
     </mat-expansion-panel>
-    <mat-card-footer class="postCreated">{{createdAt}}</mat-card-footer>
+    <mat-card-footer class="postCreated">{{post.createdAt}}</mat-card-footer>
 </mat-card>
 <br>

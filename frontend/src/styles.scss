@@ -14,3 +14,10 @@ body {
     margin: 20px;
     background-color: whitesmoke;
 }
+
+.mouseOver {
+    &:hover {
+        transform: scale(1.1);
+        color: blue;
+    }
+}

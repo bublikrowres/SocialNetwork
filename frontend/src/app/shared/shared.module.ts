@@ -5,13 +5,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { AppRoutingModule } from "../app-routing.module";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { IsAuthGuard } from './guards/is-auth.guard';
 import { NotAuthGuard } from './guards/not-auth.guard';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { AuthInterceptor } from "../shared/interceptors/shared.interceptor";
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [PageNotFoundComponent],
@@ -25,13 +27,15 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatExpansionModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers:[
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     IsAuthGuard,
     NotAuthGuard
   ],
-  exports: [MatCardModule,MatInputModule,MatButtonModule,AppRoutingModule,HttpClientModule,FormsModule,MatExpansionModule,MatMenuModule,MatIconModule]
+  exports: [MatCardModule,MatInputModule,MatButtonModule,AppRoutingModule,HttpClientModule,FormsModule,MatExpansionModule,MatMenuModule,MatIconModule,MatDialogModule]
 })
 export class SharedModule {
  }
