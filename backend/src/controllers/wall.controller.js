@@ -83,6 +83,7 @@ router.post('/comment', isAuth, async(req, res) => {
 router.post('/comment/new', isAuth, async(req, res) => {
     const postCommand = new PostCommand();
     const request = req.body;
+    // console.log(req.body);
     try {
         const result = await postCommand.createComment(request);
         res.json(result);

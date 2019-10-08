@@ -1,4 +1,5 @@
 const { Post, User, Comment, Like } = require('../models/databaseConnector');
+const moment = require('moment');
 
 
 class PostCommand {
@@ -16,10 +17,18 @@ class PostCommand {
             // console.log(comments)
             const likes = await Like.findAll({ where: { postId: post.id } });
             // console.log(likes)
+            // console.log(post.createdAt)
+            // console.log(moment(post.createdAt).format('MMMM Do YYYY, h:mm:ss a'))
+            // console.log(moment(post.createdAt).startOf('day').fromNow());
+            // console.log(moment(post.createdAt).subtract(1, 'days').calendar());
+            // console.log(moment(post.createdAt).calendar());
+            // post.createdAt = moment().calendar();
+            // console.log(post.createdAt)
             post.comments = comments.length;
             post.likes = likes.length;
+            post.dateFormatted = moment(post.createdAt).calendar();
         }
-        return { allPosts };
+        return { allPosts: allPosts.reverse() };
     }
 
     async viewPost(postID) {
@@ -66,10 +75,12 @@ class PostCommand {
     }
     async getComments(postID) {
         const comments = await Comment.findAll({ where: { postId: postID } })
+            // console.log(comments)
         for (const comment of comments) {
             const userName = await User.findOne({ where: { id: comment.userId } });
             comment.dataValues.name = userName.name;
         }
+        // console.log(comments)
         return { comments }
     }
     async createComment(request) {
