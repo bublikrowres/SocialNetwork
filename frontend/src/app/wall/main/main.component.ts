@@ -9,8 +9,6 @@ import {EditComponent} from './edit/edit.component';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  alertStatus: boolean = false;
-  alertContent: string = 'test';
   newPostStatus:boolean = false;
   numberOfPosts: number;
   postsArray = [];
@@ -34,24 +32,7 @@ export class MainComponent implements OnInit {
     this.postService.allposts().subscribe((data)=>{
       this.numberOfPosts = data['numberOfPosts'];
       this.postsArray = data['allPosts'];
-      // console.log('refresh feed called');
     });
-  }
-  alert(message){
-    this.alertStatus = true;
-    this.alertContent = message;
-    if(!this.alertTimeout){
-      this.alertTimeout = setTimeout(() => {
-        this.alertStatus = false;
-        this.alertContent = '';
-      }, 2000);
-    }else {
-      clearInterval(this.alertTimeout)
-      this.alertTimeout = setTimeout(() => {
-        this.alertStatus = false;
-        this.alertContent = '';
-      }, 2000);
-    }
   }
   newPost(event){
     const newPost = {
@@ -66,7 +47,6 @@ export class MainComponent implements OnInit {
       let message = data['message'];
       this.toggleNewPost();
       this.refreshFeed();
-      this.alert(message);
     })
     
   }
@@ -84,7 +64,6 @@ export class MainComponent implements OnInit {
 
   deletePost(message){
     this.refreshFeed();
-    this.alert(message);
   }
   
   openDialog(post): void {
@@ -98,8 +77,4 @@ export class MainComponent implements OnInit {
     });
   }
 
-  likeOrComment(event){
-    this.refreshFeed();
-    this.alert(event.message)
-  }
 }

@@ -7,15 +7,13 @@ import { PostService } from "../../services/post.service";
   styleUrls: ['./wall-feed.component.scss']
 })
 export class WallFeedComponent implements OnInit {
+  currentUser;
   currentUserStatus: boolean = false;
-  currentUser = JSON.parse(localStorage.getItem('user'));
   commentArray = [];
-  addButtonToggle: boolean = false;
   comment_message: string;
-  alertStatus: boolean = false;
-  alertMessage:string;
+  panelOpenState: boolean = false;
   constructor(
-    private postService: PostService,
+    private postService: PostService
       ) { }
 
   @Input() post: any;
@@ -26,9 +24,16 @@ export class WallFeedComponent implements OnInit {
 
   ngOnInit() {
     this.feedCheck();
+    this.currentUser = JSON.parse(localStorage.getItem('user'))
+  }
+  
+
+  togglePanel() {
+      this.panelOpenState = !this.panelOpenState
   }
 
   feedCheck(){
+    this.currentUser = JSON.parse(localStorage.getItem('user'))
     if(this.currentUser.email === this.post['user.email']){
       return this.currentUserStatus = true;
     }
@@ -36,7 +41,6 @@ export class WallFeedComponent implements OnInit {
 
   editPost(){
     this.edit.emit(this.post);
-    console.log(this.post)
   }
 
   deletePost(){
@@ -48,11 +52,11 @@ export class WallFeedComponent implements OnInit {
 
   likeThis(){
     const request = { 
-      userID : this.post['user.id'],
+      userID : this.currentUser.id,
       postID : this.post.id
     }
     this.postService.like(request).subscribe((data)=>{
-      this.refresh.emit(data)
+      this.refresh.emit()
     })
   }
 
@@ -64,23 +68,16 @@ export class WallFeedComponent implements OnInit {
     })
   }
 
-  commentToggle(){
-    this.addButtonToggle ? this.addButtonToggle = false : this.addButtonToggle = true;
-  }
 
   createComment(elem){
     if(!elem.value){
-      this.alertStatus = true;
-      this.alertMessage = 'Content required'
     } else {
-      this.alertStatus = false;
-      this.alertMessage = '';
       const request = { message: elem.value , postID: this.post.id, userID: this.currentUser.id};
       this.postService.createComment(request).subscribe((data)=>{
         this.populateComments()
+        this.comment_message = '';
+        this.refresh.emit()
       })
-      this.comment_message = ''
-      this.commentToggle();
     }
   }
 }

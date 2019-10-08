@@ -1,44 +1,45 @@
-<mat-card class="postBody">
-    <mat-card-title-group class="whiteBG">
-        <mat-card-title>{{post.title}}</mat-card-title>
-        <div *ngIf="currentUserStatus">
-            <mat-menu #postOptions="matMenu">
-                <button mat-menu-item (click)="editPost()"><mat-icon>edit</mat-icon>Edit</button>
-                <button mat-menu-item (click)="deletePost()"><mat-icon>delete</mat-icon>Delete</button>
-            </mat-menu>
-            <button mat-icon-button [matMenuTriggerFor]="postOptions">
-                <mat-icon>more_horiz</mat-icon>
-            </button>
-        </div>
-        <mat-card-subtitle class="postAuthor">{{post['user.name']}}</mat-card-subtitle>
+<mat-card>
+    <mat-card-title-group>
     </mat-card-title-group>
-    <mat-card-content class="postDescription whiteBG">{{post.description}}</mat-card-content>
-    <div class="likeAndComment">
-        <div>
-            <label>{{post.likes}}</label>
-            <mat-icon class="mouseOver" (click)="likeThis()">thumb_up</mat-icon>
-        </div>
-    </div>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header (click)="populateComments($event)">
-            <mat-panel-title class="likeAndComment">
-                <div>
-                    <label>{{post.comments}}</label>
-                    <mat-icon>comment</mat-icon>
+    <mat-card-content class="postDescription">
+        <div class="postHeader">
+            <mat-card-subtitle>{{post['user.name']}} @ {{post.dateFormatted}}</mat-card-subtitle>
+            <div *ngIf="currentUserStatus">
+                <mat-menu #postOptions="matMenu">
+                    <button mat-menu-item (click)="editPost()"><mat-icon>edit</mat-icon>Edit</button>
+                    <button mat-menu-item (click)="deletePost()"><mat-icon>delete</mat-icon>Delete</button>
+                </mat-menu>
+                <div mat-icon-button [matMenuTriggerFor]="postOptions">
+                    <mat-icon>more_horiz</mat-icon>
                 </div>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-
-        <sn-comment *ngFor="let item of commentArray" [comment]="item"></sn-comment>
-
-        <button *ngIf="!addButtonToggle" mat-raised-button color="primary" (click)="commentToggle()">Add comment</button>
-        <br>
-        <div class="flexAround" *ngIf="addButtonToggle">
-            <textarea class="commentTextarea" #textMessage rows="2" required maxlength="255" matInput placeholder="Content" [(ngModel)]="comment_message" [ngModelOptions]="{standalone: true}"></textarea>
-            <button mat-raised-button color="primary" (click)="createComment(textMessage)">Add</button>
-            <p *ngIf="alertStatus" class="alert">{{alertMessage}}</p>
+            </div>
         </div>
+        <mat-card-title class="postTitle">{{post.title}}</mat-card-title>
+        <hr>
+        <mat-card-title>{{post.description}}</mat-card-title>
+
+    </mat-card-content>
+    <mat-card-content class="likeAndComment">
+        <div class="mouseOver" (click)="likeThis()">
+            <label>{{post.likes}} Like(s)</label>
+            <mat-icon title="Like this post">thumb_up</mat-icon>
+        </div>
+        <div class="mouseOver" (click)="togglePanel();populateComments($event)">
+            <label>{{post.comments}} Comment(s)</label>
+            <mat-icon>comment</mat-icon>
+        </div>
+        <div class="mouseOver">
+            <label>Share</label>
+            <mat-icon class="mouseOver" title="Share this post (not created yet)">share</mat-icon>
+        </div>
+    </mat-card-content>
+
+    <mat-expansion-panel *ngIf="panelOpenState" [expanded]="panelOpenState">
+        <sn-comment *ngFor="let item of commentArray" [comment]="item"></sn-comment>
     </mat-expansion-panel>
-    <mat-card-footer class="postCreated">{{post.createdAt}}</mat-card-footer>
+    <mat-form-field class="example-full-width">
+        <textarea #textMessage maxlength="255" rows="2" matInput placeholder="Write a comment ... " (input)="showAdd=true" [(ngModel)]="comment_message" [ngModelOptions]="{standalone: true}"></textarea>
+        <a *ngIf="showAdd" mat-raised-button color="primary" (click)="createComment(textMessage);showAdd=false">Add</a>
+    </mat-form-field>
 </mat-card>
 <br>
