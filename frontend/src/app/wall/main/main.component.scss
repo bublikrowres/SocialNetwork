@@ -3,18 +3,6 @@
     flex-flow: column;
     height: 100%;
     align-items: center;
-    padding-top: 5%;
-    background-color: whitesmoke;
-    .alertMessage {
-        position: fixed;
-        top: 50vh;
-        border: 1px solid black;
-        width: 100%;
-        text-align: center;
-        background-color: rgb(102, 116, 163);
-        color: white;
-        padding: 35px 0;
-    }
 }
 
 @media screen and (min-width: 1024px) {

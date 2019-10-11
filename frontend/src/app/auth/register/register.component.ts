@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     //register user
     if(this.registerValidate){
       this.authService.register(this.user).subscribe((data)=>{
-        this.router.navigateByUrl('/wall');
+        this.router.navigateByUrl('/nav');
         this.registerMessage = 'You are now registed'
         this.user = {
           email: '',

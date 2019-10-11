@@ -10,11 +10,9 @@ import {EditComponent} from './edit/edit.component';
 })
 export class MainComponent implements OnInit {
   newPostStatus:boolean = false;
-  numberOfPosts: number;
   postsArray = [];
-
   user : any;
-  alertTimeout;
+
   constructor(
     private postService: PostService,
     public dialog: MatDialog
@@ -30,7 +28,6 @@ export class MainComponent implements OnInit {
 
   refreshFeed(){
     this.postService.allposts().subscribe((data)=>{
-      this.numberOfPosts = data['numberOfPosts'];
       this.postsArray = data['allPosts'];
     });
   }

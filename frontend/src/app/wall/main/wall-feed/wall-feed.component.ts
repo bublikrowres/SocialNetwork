@@ -40,6 +40,7 @@ export class WallFeedComponent implements OnInit {
   }
 
   editPost(){
+    console.log(this.post)
     this.edit.emit(this.post);
   }
 

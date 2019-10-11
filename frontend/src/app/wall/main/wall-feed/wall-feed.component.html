@@ -3,7 +3,10 @@
     </mat-card-title-group>
     <mat-card-content class="postDescription">
         <div class="postHeader">
-            <mat-card-subtitle>{{post['user.name']}} @ {{post.dateFormatted}}</mat-card-subtitle>
+            <div class="flex">
+                <img class="userAvatarPost" mat-card-image src="{{post['user.avatar']}}" alt="user profile photo" title="Go to {{post['user.name']}}'s profile">
+                <mat-card-subtitle class="createdAt"> {{post['user.name']}} @ {{post.dateFormatted}}</mat-card-subtitle>
+            </div>
             <div *ngIf="currentUserStatus">
                 <mat-menu #postOptions="matMenu">
                     <button mat-menu-item (click)="editPost()"><mat-icon>edit</mat-icon>Edit</button>

@@ -14,9 +14,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthInterceptor } from "../shared/interceptors/shared.interceptor";
 import {MatDialogModule} from '@angular/material/dialog';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @NgModule({
-  declarations: [PageNotFoundComponent],
+  declarations: [PageNotFoundComponent,NavbarComponent],
   imports: [
     CommonModule,
     MatCardModule,

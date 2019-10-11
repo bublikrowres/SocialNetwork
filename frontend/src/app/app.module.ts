@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { WallModule } from './wall/wall.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -18,6 +20,7 @@ import { WallModule } from './wall/wall.module';
     BrowserAnimationsModule,
     AuthModule,
     WallModule,
+    ProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,19 +1,8 @@
 :host {
-    background-color: rgb(102, 116, 163);
     width: 100%;
-    display: flex;
-    justify-content: center;
-    .container {
-        width: 100%;
-        margin-bottom: 15px;
-        .navBar {
-            display: flex;
-            flex-flow: row;
-            justify-content: space-around;
-            background-color: whitesmoke
-        }
-        .h1 {
-            text-align: center;
-        }
+    .navBar {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 5%;
     }
 }

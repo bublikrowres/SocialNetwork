@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
     if(this.loginValidate) {
       this.authService.login(this.email,this.password).subscribe((data)=>{
-        this.router.navigateByUrl('/wall');
+        this.router.navigateByUrl('/nav');
         this.loginMessage = "You are now logged in"
       },(err)=>{
         this.loginMessage = "Incorrect Email or Passward"
