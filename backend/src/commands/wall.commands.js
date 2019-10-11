@@ -14,19 +14,19 @@ class PostCommand {
         const allPosts = await Post.findAll({ include: [User], raw: true });
         for (const post of allPosts) {
             const comments = await Comment.findAll({ where: { postId: post.id } });
-            // console.log(comments)
             const likes = await Like.findAll({ where: { postId: post.id } });
-            // console.log(likes)
-            // console.log(post.createdAt)
-            // console.log(moment(post.createdAt).format('MMMM Do YYYY, h:mm:ss a'))
-            // console.log(moment(post.createdAt).startOf('day').fromNow());
-            // console.log(moment(post.createdAt).subtract(1, 'days').calendar());
-            // console.log(moment(post.createdAt).calendar());
-            // post.createdAt = moment().calendar();
-            // console.log(post.createdAt)
             post.comments = comments.length;
             post.likes = likes.length;
-            post.dateFormatted = moment(post.createdAt).calendar();
+
+            moment.locale('en-gb');
+            const now = moment(new Date);
+            const duration = now.diff(post.createdAt, 'days')
+                // console.log(duration)
+            if (duration < 1) {
+                post.dateFormatted = moment(post.createdAt).startOf().fromNow()
+            } else {
+                post.dateFormatted = moment(post.createdAt).format('ll')
+            }
         }
         return { allPosts: allPosts.reverse() };
     }
@@ -41,8 +41,6 @@ class PostCommand {
 
     async updatePost(postID, editedPost) {
         try {
-            console.log(postID)
-            console.log(editedPost)
             await Post.update(editedPost, { where: { id: postID } });
             return { message: 'Post updated successfully' };
         } catch (e) {

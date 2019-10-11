@@ -14,11 +14,11 @@
             "/me": "auth me page"
         },
         "/wall": {
-            "/": "see all posts",
-            "/new": "create post",
-            "/show": "view post",
-            "/update": "update post",
-            "/delete": "delete post"
+            "/ - get": "see all posts",
+            "/ - post": "create post",
+            "/:id - get'": "view post",
+            "/:id - put": "update post",
+            "/:id - delete": "delete post"
         }
     }
 }

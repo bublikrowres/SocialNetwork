@@ -25,13 +25,16 @@ class UserCommand {
         if (doubleEmail) {
             throw new Error('Email is already in DB');
         };
-
         //build user
         const userBuilt = await User.build(user);
+        const avaratSrc = 'https://www.abc.net.au/news/image/8314104-1x1-940x940.jpg'
+        userBuilt.avatar = avaratSrc;
         //hash password before storing it in DB
         userBuilt.password = md5(userBuilt.password);
+        console.log(userBuilt);
         await userBuilt.save();
         const userRaw = { id: userBuilt.id, name: userBuilt.name, email: userBuilt.email };
+
         const token = await this.createToken(userRaw);
         return { token, email: user.email, id: user.id, name: user.name };
     }
