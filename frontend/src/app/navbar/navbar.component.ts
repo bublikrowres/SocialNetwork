@@ -7,6 +7,9 @@ import { Router } from "@angular/router";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  mouse1;
+  mouse2;
+  mouse3;
   constructor(
     private router: Router
   ) { }

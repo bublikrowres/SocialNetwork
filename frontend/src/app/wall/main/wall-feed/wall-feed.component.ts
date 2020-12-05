@@ -12,6 +12,7 @@ export class WallFeedComponent implements OnInit {
   commentArray = [];
   comment_message: string;
   panelOpenState: boolean = false;
+  showAdd;
   constructor(
     private postService: PostService
       ) { }
@@ -61,7 +62,7 @@ export class WallFeedComponent implements OnInit {
     })
   }
 
-  populateComments(){
+  populateComments(elem){
     this.commentArray = []
     const request = { postID : this.post.id }
     this.postService.getComments(request).subscribe((data)=>{
@@ -75,7 +76,7 @@ export class WallFeedComponent implements OnInit {
     } else {
       const request = { message: elem.value , postID: this.post.id, userID: this.currentUser.id};
       this.postService.createComment(request).subscribe((data)=>{
-        this.populateComments()
+        this.populateComments(elem)
         this.comment_message = '';
         this.refresh.emit()
       })

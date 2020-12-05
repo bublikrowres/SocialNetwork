@@ -12,7 +12,7 @@ export class MainComponent implements OnInit {
   newPostStatus:boolean = false;
   postsArray = [];
   user : any;
-
+  numberOfPosts;
   constructor(
     private postService: PostService,
     public dialog: MatDialog
