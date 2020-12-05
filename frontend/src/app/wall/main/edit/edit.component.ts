@@ -11,7 +11,7 @@ import { PostService } from "../../services/post.service";
 export class EditComponent implements OnInit {
   alertStatus: boolean = false;
   alertMessage: string;
-
+  characterLimit;
   title: string = 'post title';
   description: string = 'post descrip';
   constructor(

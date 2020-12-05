@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CommentComponent implements OnInit {
   @Input() comment = {
     id: '',
-    message: ''
+    message: '',
+    name: ''
   }
   constructor() { }
 
